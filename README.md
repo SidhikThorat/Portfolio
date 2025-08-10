@@ -49,32 +49,6 @@ npm run build
 npm run preview
 ```
 
-## 🚀 Deployment
-
-This project can be deployed to various platforms:
-
-### Vercel (Recommended)
-1. Push your code to GitHub
-2. Connect your repository to Vercel
-3. Deploy automatically
-
-### Netlify
-1. Build the project: `npm run build`
-2. Drag and drop the `dist` folder to Netlify
-
-### GitHub Pages
-1. Push your code to GitHub
-2. Enable GitHub Pages in repository settings
-3. The site will be available at `https://yourusername.github.io/Sidhik-Porfolio-main/`
-
-### Firebase Hosting
-```bash
-npm install -g firebase-tools
-firebase login
-firebase init hosting
-npm run build
-firebase deploy
-```
 
 ## 📁 Project Structure
 
@@ -101,6 +75,6 @@ This project is licensed under the MIT License.
 
 ## 📧 Contact
 
-Sidhik Thorat - [your-email@example.com]
+Sidhik Thorat - sidhikthoratjob08@gmail.com
 
 Project Link: [https://github.com/yourusername/Sidhik-Porfolio-main](https://github.com/yourusername/Sidhik-Porfolio-main)
