@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Mail, Github, Linkedin, Twitter, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import resumePdf from '@/assets/Sidhik_Thorat_Resume.pdf';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -17,8 +18,25 @@ const Footer = () => {
 
   // Resume download handler
   const handleDownloadResume = () => {
-    // In a real implementation, this would be a link to an actual resume file
-    alert('Resume download would start here. Replace this with an actual file download.');
+    fetch(resumePdf)
+      .then(response => {
+        if (response.ok) {
+          return response.blob();
+        }
+        throw new Error('Resume not found');
+      })
+      .then(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Sidhik_Thorat_Resume.pdf';
+        a.click();
+        URL.revokeObjectURL(url);
+      })
+      .catch(error => {
+        console.error('Resume download failed:', error);
+        alert('Failed to download resume. Please try again.');
+      });
   };
 
   return (

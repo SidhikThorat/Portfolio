@@ -423,18 +423,30 @@ const Home = () => {
               variant="secondary" 
               size="lg" 
               className="mt-4 hover-scale"
-              asChild
+              onClick={() => {
+                fetch(resumePdf)
+                  .then(response => {
+                    if (response.ok) {
+                      return response.blob();
+                    }
+                    throw new Error('Resume not found');
+                  })
+                  .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'Sidhik_Thorat_Resume.pdf';
+                    a.click();
+                    URL.revokeObjectURL(url);
+                  })
+                  .catch(error => {
+                    console.error('Resume download failed:', error);
+                    alert('Failed to download resume. Please try again.');
+                  });
+              }}
             >
-              <a 
-                href={resumePdf} 
-                download="Sidhik_Thorat_Resume.pdf"
-                onClick={(e) => {
-                  console.log('Resume link clicked:', e.currentTarget.href);
-                }}
-              >
-                <Download className="mr-2" size={20} />
-                Download Full Resume
-              </a>
+              <Download className="mr-2" size={20} />
+              Download Full Resume
             </Button>
           </motion.div>
         </div>
