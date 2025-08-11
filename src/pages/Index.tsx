@@ -13,6 +13,7 @@ import { ArrowRight, Code, Database, Layout, Server, Download, Clock, Github } f
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { motion } from 'framer-motion';
 import { getPublicAsset } from '@/lib/utils';
+import AssetTest from '@/components/AssetTest';
 
 // Sample project data
 const featuredProjects = [
@@ -123,6 +124,7 @@ const Home = () => {
 
   return (
     <>
+      <AssetTest />
       <Header />
       
       {/* Hero Section */}
@@ -138,7 +140,7 @@ const Home = () => {
               <div className="flex items-center gap-4 mb-3">
                 <div className="w-20 h-20 border-2 border-primary rounded-full overflow-hidden">
                   <img 
-                    src={getPublicAsset('Sidhik.png')} 
+                    src="/Sidhik.png" 
                     alt={yourName} 
                     className="w-full h-full object-cover"
                     onError={(e) => {
@@ -424,7 +426,7 @@ const Home = () => {
               asChild
             >
               <a 
-                href={getPublicAsset('Sidhik_Thorat_Resume.pdf')} 
+                href="/Sidhik_Thorat_Resume.pdf" 
                 download="Sidhik_Thorat_Resume.pdf"
                 onClick={(e) => {
                   console.log('Resume link clicked:', e.currentTarget.href);
