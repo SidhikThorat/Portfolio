@@ -12,6 +12,7 @@ import Footer from '@/components/Footer';
 import { ArrowRight, Code, Database, Layout, Server, Download, Clock, Github } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { motion } from 'framer-motion';
+import { getPublicAsset } from '@/lib/utils';
 
 // Sample project data
 const featuredProjects = [
@@ -137,10 +138,11 @@ const Home = () => {
               <div className="flex items-center gap-4 mb-3">
                 <div className="w-20 h-20 border-2 border-primary rounded-full overflow-hidden">
                   <img 
-                    src="/Sidhik.png" 
+                    src={getPublicAsset('Sidhik.png')} 
                     alt={yourName} 
                     className="w-full h-full object-cover"
                     onError={(e) => {
+                      console.error('Failed to load image:', e.currentTarget.src);
                       e.currentTarget.style.display = 'none';
                       e.currentTarget.nextElementSibling?.classList.remove('hidden');
                     }}
@@ -421,7 +423,13 @@ const Home = () => {
               className="mt-4 hover-scale"
               asChild
             >
-              <a href="/Sidhik_Thorat_Resume.pdf" download="Sidhik_Thorat_Resume.pdf">
+              <a 
+                href={getPublicAsset('Sidhik_Thorat_Resume.pdf')} 
+                download="Sidhik_Thorat_Resume.pdf"
+                onClick={(e) => {
+                  console.log('Resume link clicked:', e.currentTarget.href);
+                }}
+              >
                 <Download className="mr-2" size={20} />
                 Download Full Resume
               </a>
