@@ -1,15 +1,19 @@
 import React from 'react';
+import sidhikImage from '@/assets/Sidhik.png';
+import resumePdf from '@/assets/Sidhik_Thorat_Resume.pdf';
 
 const AssetTest = () => {
   const testImage = () => {
+    console.log('Testing imported image:', sidhikImage);
     const img = new Image();
     img.onload = () => console.log('Image loaded successfully:', img.src);
     img.onerror = () => console.error('Image failed to load:', img.src);
-    img.src = '/Sidhik.png';
+    img.src = sidhikImage;
   };
 
   const testResume = () => {
-    fetch('/Sidhik_Thorat_Resume.pdf')
+    console.log('Testing imported resume:', resumePdf);
+    fetch(resumePdf)
       .then(response => {
         console.log('Resume response:', response.status, response.headers.get('content-type'));
         if (response.ok) {
