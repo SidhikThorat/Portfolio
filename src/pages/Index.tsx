@@ -13,7 +13,6 @@ import { ArrowRight, Code, Database, Layout, Server, Download, Clock, Github } f
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { motion } from 'framer-motion';
 import { getPublicAsset } from '@/lib/utils';
-import AssetTest from '@/components/AssetTest';
 import sidhikImage from '@/assets/Sidhik.png';
 import resumePdf from '@/assets/Sidhik_Thorat_Resume.pdf';
 
@@ -126,7 +125,6 @@ const Home = () => {
 
   return (
     <>
-      <AssetTest />
       <Header />
       
       {/* Hero Section */}
