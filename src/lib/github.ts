@@ -3,6 +3,33 @@ import { GraphQLClient } from 'graphql-request';
 // GitHub GraphQL endpoint
 const GITHUB_API_URL = 'https://api.github.com/graphql';
 
+// Type definitions for GitHub GraphQL response
+interface ContributionDay {
+  contributionCount: number;
+  date: string;
+}
+
+interface Week {
+  contributionDays: ContributionDay[];
+}
+
+interface ContributionCalendar {
+  totalContributions: number;
+  weeks: Week[];
+}
+
+interface ContributionsCollection {
+  contributionCalendar: ContributionCalendar;
+}
+
+interface User {
+  contributionsCollection: ContributionsCollection;
+}
+
+interface GitHubGraphQLResponse {
+  user: User | null;
+}
+
 // GraphQL query to fetch contribution data
 const CONTRIBUTION_QUERY = `
   query($username: String!) {
@@ -41,7 +68,7 @@ export const fetchGitHubContributions = async (username: string, token?: string)
     const client = createGitHubClient(token);
     const variables = { username };
     
-    const data = await client.request(CONTRIBUTION_QUERY, variables);
+    const data = await client.request<GitHubGraphQLResponse>(CONTRIBUTION_QUERY, variables);
     
     if (!data.user) {
       throw new Error(`User ${username} not found`);
@@ -57,8 +84,8 @@ export const fetchGitHubContributions = async (username: string, token?: string)
       level: 0 | 1 | 2 | 3 | 4;
     }> = [];
 
-    weeks.forEach((week: any) => {
-      week.contributionDays.forEach((day: any) => {
+    weeks.forEach((week: Week) => {
+      week.contributionDays.forEach((day: ContributionDay) => {
         const count = day.contributionCount;
         let level: 0 | 1 | 2 | 3 | 4 = 0;
         
@@ -79,8 +106,14 @@ export const fetchGitHubContributions = async (username: string, token?: string)
       totalContributions: calendar.totalContributions,
       contributions
     };
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error fetching GitHub contributions:', error);
+    
+    // Check if it's an authentication error
+    if (error?.response?.status === 401) {
+      throw new Error('GitHub API authentication failed. Please check your token or use without token.');
+    }
+    
     throw error;
   }
 };

@@ -29,7 +29,7 @@ const GithubCalendar: React.FC<GithubCalendarProps> = ({ username, githubToken }
         let contributionData;
         
         // Try to fetch real contribution data
-        if (githubToken) {
+        if (githubToken && githubToken.trim() !== '') {
           // Use GraphQL API with token for real data
           try {
             contributionData = await fetchGitHubContributions(username, githubToken);
@@ -37,8 +37,12 @@ const GithubCalendar: React.FC<GithubCalendarProps> = ({ username, githubToken }
               title: "Real GitHub data loaded",
               description: `Loaded ${contributionData.totalContributions} contributions for ${username}`,
             });
-          } catch (error) {
+          } catch (error: any) {
             console.warn('GraphQL API failed, falling back to REST API:', error);
+            // Check if it's specifically an auth error
+            if (error?.message?.includes('authentication failed')) {
+              console.warn('GitHub token is invalid or expired, using REST API fallback');
+            }
             contributionData = await fetchGitHubContributionsREST(username);
             toast({
               title: "GitHub activity loaded",
@@ -47,6 +51,7 @@ const GithubCalendar: React.FC<GithubCalendarProps> = ({ username, githubToken }
           }
         } else {
           // Use REST API without token (limited but works)
+          console.log('No GitHub token provided, using REST API');
           contributionData = await fetchGitHubContributionsREST(username);
           toast({
             title: "GitHub activity loaded",
