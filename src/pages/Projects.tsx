@@ -16,7 +16,7 @@ const projectsData = [
     tags: ["React", "Node.js", "Express", "MongoDB", "Tailwind", "Cloudinary", "Razorpay", "Google Calendar", "QR Attendance", "Socket.io", "DeepSeek Chatbot", "Llama 3.0 API"],
     category: "full-stack",
     githubUrl: "https://github.com/PrakritiMitra/PrakritiMitra",
-    liveUrl: "https://github.com/PrakritiMitra/PrakritiMitra"
+    liveUrl: "https://www.prakritimitra.me/"
   },
   {
     id: 2,
