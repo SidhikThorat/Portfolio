@@ -38,6 +38,16 @@ const projectsData = [
     githubUrl: "https://github.com/SidhikThorat/Advanced-Weather-App",
     liveUrl: "https://github.com/SidhikThorat/Advanced-Weather-App"
   },
+  {
+    id: 4,
+    title: "Live Polling System",
+    description: "Live Polling application with real-time results for Teachers and Students",
+    image: "https://images.unsplash.com/photo-1526743655626-e3d757b13d61?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=450&q=80",
+    tags: ["Socket.io", "React", "Redux", "Express", "MongoDB", "Node.js"],
+    category: "full-stack",
+    githubUrl: "https://github.com/SidhikThorat/Live-Polling-System",
+    liveUrl: "https://live-polling-system-1-93yb.onrender.com/"
+  },
 ];
 
 const Projects = () => {
